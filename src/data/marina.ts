@@ -13,10 +13,10 @@ export const marina = {
   established: 1995,
 
   address: {
-    street: '3755 Highway 31 N', // VERIFY: some listings show "US Highway 31 S"
+    street: '3755 Highway 31 N',
     city: 'Decatur',
     state: 'AL',
-    zip: '35601', // VERIFY: some listings show 35603
+    zip: '35601',
     landmark: 'At the foot of the Hudson Memorial Bridge',
   },
 

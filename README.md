@@ -24,7 +24,6 @@ services, rental descriptions, drive times and social links. Change it there and
 Items marked `VERIFY` in that file came from public directory listings rather than the marina itself and should be
 confirmed before launch:
 
-- Street address suffix (N vs S) and ZIP (35601 vs 35603)
 - Second phone number
 - Map coordinates
 - Facebook URL and a public email address (currently empty)
