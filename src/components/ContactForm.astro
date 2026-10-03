@@ -1,0 +1,95 @@
+---
+import { marina } from '../data/marina';
+interface Props { subject?: string; topics?: readonly string[] }
+const {
+  subject = 'Website inquiry',
+  topics = ['Slip availability', 'Transient dockage', 'Service & repair', 'Rentals', 'Other'],
+} = Astro.props;
+const { endpoint, netlify } = marina.form;
+const action = endpoint || (netlify ? '/' : '#');
+---
+<form
+  class="form"
+  method="POST"
+  action={action}
+  data-endpoint={endpoint}
+  data-email={marina.email}
+  data-subject={subject}
+  {...(netlify ? { 'data-netlify': 'true', name: 'contact', 'netlify-honeypot': 'company' } : {})}
+  novalidate
+>
+  {netlify && <input type="hidden" name="form-name" value="contact" />}
+  <p class="visually-hidden" aria-hidden="true">
+    <label>Leave this field empty <input type="text" name="company" tabindex="-1" autocomplete="off" /></label>
+  </p>
+  <div class="form-row">
+    <label>Name <input type="text" name="name" required autocomplete="name" /></label>
+    <label>Phone <input type="tel" name="phone" autocomplete="tel" /></label>
+  </div>
+  <div class="form-row">
+    <label>Email <input type="email" name="email" required autocomplete="email" /></label>
+    <label>I'm asking about
+      <select name="topic">
+        {topics.map((t) => <option>{t}</option>)}
+      </select>
+    </label>
+  </div>
+  <label>Boat length and type <input type="text" name="boat" placeholder="e.g. 24 ft pontoon" /></label>
+  <label>Message <textarea name="message" required></textarea></label>
+  <div class="btn-row" style="align-items:center">
+    <button class="btn btn--primary" type="submit">Send message</button>
+    <span class="muted">Or call <a href={marina.phone.mainHref}>{marina.phone.main}</a></span>
+  </div>
+  <p class="form-status" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  // Progressive enhancement: validate, then POST to the configured endpoint.
+  // With no endpoint configured, open the visitor's mail client instead.
+  document.querySelectorAll<HTMLFormElement>('form.form').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('.form-status')!;
+    form.addEventListener('submit', async (e) => {
+      if (form.dataset.netlify !== undefined && !form.dataset.endpoint) return; // let Netlify handle it
+      e.preventDefault();
+      status.className = 'form-status';
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const data = new FormData(form);
+      if ((data.get('company') as string)?.length) return; // honeypot
+
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) {
+        const to = form.dataset.email;
+        const body = [...data.entries()]
+          .filter(([k]) => k !== 'company')
+          .map(([k, v]) => `${k}: ${v}`)
+          .join('\n');
+        if (to) {
+          location.href = `mailto:${to}?subject=${encodeURIComponent(form.dataset.subject || 'Website inquiry')}&body=${encodeURIComponent(body)}`;
+        } else {
+          status.textContent = 'Online messages are not set up yet. Please call the marina office.';
+          status.classList.add('err');
+        }
+        return;
+      }
+
+      const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+      btn.disabled = true;
+      status.textContent = 'Sending…';
+      try {
+        const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        status.textContent = 'Thanks! We received your message and will get back to you soon.';
+        status.classList.add('ok');
+      } catch {
+        status.textContent = 'Something went wrong. Please call the marina office instead.';
+        status.classList.add('err');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  });
+</script>

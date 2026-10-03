@@ -1,0 +1,68 @@
+---
+/**
+ * Decorative illustrated hero backdrop (river, docks, boats, hills at dusk).
+ * Replace with a real photo by swapping this component for an <img> in index.astro.
+ */
+---
+<svg class="scene" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b1f33"/><stop offset=".55" stop-color="#1a4468"/><stop offset=".8" stop-color="#2a8ca8"/><stop offset="1" stop-color="#e8803a"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a6f86"/><stop offset="1" stop-color="#0d2b43"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb46b" stop-opacity=".9"/><stop offset="1" stop-color="#ffb46b" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="720" fill="url(#sky)"/>
+  <circle cx="1040" cy="430" r="62" fill="#ffd08a"/>
+  <!-- hills -->
+  <path d="M0 470C180 420 300 440 420 452S640 400 780 430 980 470 1120 440 1340 420 1440 450V480H0z" fill="#153650"/>
+  <path d="M0 482C200 460 360 470 520 478S760 455 900 470 1120 492 1440 470V500H0z" fill="#0f2a40"/>
+  <!-- bridge -->
+  <g stroke="#0b1f33" stroke-width="6" fill="none">
+    <path d="M0 468H1440"/>
+    <path d="M60 468V500M220 468V500M380 468V500M540 468V500M700 468V500M860 468V500M1020 468V500M1180 468V500M1340 468V500"/>
+    <path d="M300 468Q460 380 620 468M620 468Q780 380 940 468" stroke-width="4"/>
+  </g>
+  <!-- water -->
+  <rect y="500" width="1440" height="220" fill="url(#water)"/>
+  <rect x="940" y="500" width="200" height="220" fill="url(#glow)" opacity=".55"/>
+  <g stroke="#5fb3c9" stroke-opacity=".35" stroke-width="2" fill="none">
+    <path d="M0 540c60-6 120 6 180 0s120-6 180 0 120 6 180 0 120-6 180 0 120 6 180 0 120-6 180 0 120 6 180 0 120-6 180 0"/>
+    <path d="M0 590c60-6 120 6 180 0s120-6 180 0 120 6 180 0 120-6 180 0 120 6 180 0 120-6 180 0 120 6 180 0 120-6 180 0" stroke-opacity=".22"/>
+    <path d="M0 650c60-6 120 6 180 0s120-6 180 0 120 6 180 0 120-6 180 0 120 6 180 0 120-6 180 0 120 6 180 0 120-6 180 0" stroke-opacity=".15"/>
+  </g>
+  <!-- dock -->
+  <g fill="#3b2a1d">
+    <rect x="0" y="600" width="520" height="22" rx="3"/>
+    <rect x="40" y="622" width="10" height="60"/><rect x="160" y="622" width="10" height="60"/><rect x="280" y="622" width="10" height="60"/><rect x="400" y="622" width="10" height="60"/><rect x="500" y="622" width="10" height="60"/>
+    <rect x="200" y="540" width="14" height="70" rx="3"/><rect x="330" y="540" width="14" height="70" rx="3"/>
+  </g>
+  <!-- covered slips roof -->
+  <path d="M190 540h170l-20-34H210z" fill="#1f3d55"/>
+  <!-- boats -->
+  <g>
+    <path d="M560 600q60 22 120 0l12-26H548z" fill="#f4efe3"/>
+    <rect x="590" y="556" width="48" height="22" rx="4" fill="#cfe3ea"/>
+    <path d="M612 556V500l34 56z" fill="#f4efe3" opacity=".9"/>
+  </g>
+  <g>
+    <path d="M760 612q50 18 100 0l10-22H750z" fill="#e3e9ee"/>
+    <rect x="782" y="578" width="40" height="16" rx="3" fill="#0b1f33"/>
+  </g>
+  <g>
+    <path d="M1180 606q70 24 140 0l14-28h-168z" fill="#f7f3ea"/>
+    <rect x="1215" y="560" width="60" height="22" rx="4" fill="#5fb3c9"/>
+    <path d="M1244 560V470l48 90z" fill="#f7f3ea" opacity=".95"/>
+  </g>
+  <!-- reflections -->
+  <g fill="#fff" opacity=".08">
+    <ellipse cx="620" cy="640" rx="70" ry="6"/><ellipse cx="810" cy="650" rx="55" ry="5"/><ellipse cx="1250" cy="650" rx="80" ry="7"/>
+  </g>
+</svg>
+<style>
+  .scene { position: absolute; inset: 0; width: 100%; height: 100%; }
+</style>

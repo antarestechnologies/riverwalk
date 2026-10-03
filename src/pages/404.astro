@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+---
+<Base title="Page not found" description="That page drifted away.">
+  <PageHero eyebrow="404" title="That page drifted away." lead="The link you followed may be old. Try one of the pages below.">
+    <div class="btn-row">
+      <a class="btn btn--primary" href="/">Back to home</a>
+      <a class="btn btn--ghost" href="/visit/">Visit & contact</a>
+    </div>
+  </PageHero>
+</Base>

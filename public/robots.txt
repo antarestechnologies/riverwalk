@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://riverwalkmarinadecatur.com/sitemap-index.xml

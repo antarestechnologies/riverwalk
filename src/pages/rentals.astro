@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactForm from '../components/ContactForm.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Icon from '../components/Icon.astro';
+import { marina } from '../data/marina';
+const icons = ['boat', 'paddle', 'waves'];
+---
+<Base title="Rentals" description="Rent a pontoon boat, kayak, canoe or paddleboard at Riverwalk Marina and explore Wheeler Lake and the Tennessee River from Decatur, Alabama.">
+  <PageHero eyebrow="Rentals" title="No boat? Rent one and go."
+    lead="Pontoons for the whole crew, or kayaks, canoes and paddleboards for a quiet morning on the backwaters." />
+
+  <section class="section">
+    <div class="container grid grid--3">
+      {marina.rentals.map((r, i) => (
+        <div class="card">
+          <div class="icon"><Icon name={icons[i]} /></div>
+          <h3>{r.title}</h3>
+          <p>{r.blurb}</p>
+          <p class="muted" style="font-size:.92rem">{r.requirements}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">How it works</span>
+        <h2>Reserve by phone, check in at the ship store.</h2>
+        <ol class="steps">
+          <li><strong>Call ahead.</strong> Rentals are first come, first served, and summer weekends book up. Call <a href={marina.phone.mainHref}>{marina.phone.main}</a> to hold a time.</li>
+          <li><strong>Check in.</strong> Arrive about 15 minutes early with a photo ID. We will go over the boat, the lake and local rules.</li>
+          <li><strong>Head out.</strong> Life jackets, paddles and safety gear are included. Fuel for pontoons is charged on return.</li>
+          <li><strong>Head back in.</strong> Tie up at the dock, settle fuel for pontoons, and you are done.</li>
+        </ol>
+      </div>
+      <div class="notice">
+        <strong>Good to know.</strong> Alabama requires a boater safety certification to operate a motorized vessel. Out-of-state visitors may operate with a valid license from their home state for up to 45 days. Rental rates, deposits and seasonal hours are confirmed when you book.
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Rental request</span>
+        <h2>Tell us what you'd like to rent.</h2>
+        <p class="lead">Send the date, party size and the kind of boat you want. We will confirm availability and pricing by phone or email.</p>
+      </div>
+      <ContactForm subject="Rental request" topics={['Pontoon boat', 'Kayak', 'Canoe', 'Paddleboard', 'Group outing']} />
+    </div>
+  </section>
+
+  <CallToAction title="Book a rental" text="Call the marina to reserve a pontoon, kayak, canoe or paddleboard." />
+</Base>
+
+<style>
+  .steps { padding-left: 1.2rem; display: grid; gap: .8rem; }
+</style>
