@@ -45,7 +45,7 @@ in `src/styles/global.css`.
 
 The home page hero plays a muted, looping background video when `public/videos/hero.mp4` exists (and `hero.webm` if
 present), with `public/images/hero-poster.jpg` shown while it loads. Without those files the illustrated scene is
-used. Keep the clip short and small (about 10–20 seconds, under 5 MB) so the page stays fast on phones. Visitors who
+used. The current clip is the marina drone montage encoded at 720p (about 4 MB each for MP4 and WebM), which is plenty for a background behind the dark overlay. To replace it, encode the new clip the same way and keep it under about 5 MB so the page stays fast on phones. Visitors who
 have "reduce motion" turned on see the poster or illustration instead.
 
 ## Photos
