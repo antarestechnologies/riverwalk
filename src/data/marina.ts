@@ -31,8 +31,10 @@ export const marina = {
   },
   email: '', // VERIFY: add the marina's public email when known
 
-  /** Slip-holder / customer portal link shown in the nav when set. VERIFY: get the URL from the current site. */
-  portalUrl: '',
+  /** Dockwa booking page for the marina. Shown as "Marina Portal" in the nav and footer, and as a booking button on the slips page. */
+  portalUrl:
+    'https://dockwa.com/explore/destination/55cpgrn-riverwalk-marina?utm_campaign=marina_site_referral&utm_medium=web_badge&utm_source=55cpgrn-riverwalk-marina&form=transient',
+  portalLabel: 'Marina Portal',
 
   social: {
     facebook: 'https://www.facebook.com/riverwalksteve/', // VERIFY

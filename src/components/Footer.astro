@@ -36,7 +36,7 @@ const year = new Date().getFullYear();
       {marina.email && <p><a href={`mailto:${marina.email}`}>{marina.email}</a></p>}
       <ul class="foot-nav">
         {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
-        {marina.portalUrl && <li><a href={marina.portalUrl} target="_blank" rel="noopener">Marina Portal</a></li>}
+        {marina.portalUrl && <li><a href={marina.portalUrl} target="_blank" rel="noopener">{marina.portalLabel}</a></li>}
       </ul>
     </div>
   </div>

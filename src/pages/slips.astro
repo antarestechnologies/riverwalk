@@ -8,7 +8,12 @@ import { marina } from '../data/marina';
 ---
 <Base title="Slips & Storage" description={`Covered and open wet slips, sailboat slips and transient dockage at Riverwalk Marina on Wheeler Lake in Decatur, AL. ${marina.slips.total} slips with ${marina.water.docksideDepth} dockside depth.`}>
   <PageHero eyebrow="Slips & storage" title="A protected home for your boat on Wheeler Lake."
-    lead={`${marina.slips.total} floating slips, covered and open, with shore power, water and ${marina.water.docksideDepth} of depth right at the dock.`} />
+    lead={`${marina.slips.total} floating slips, covered and open, with shore power, water and ${marina.water.docksideDepth} of depth right at the dock.`}>
+    <div class="btn-row">
+      <a class="btn btn--primary" href={marina.portalUrl} target="_blank" rel="noopener">Reserve on Dockwa</a>
+      <a class="btn btn--ghost" href="#inquire">Ask about a seasonal slip</a>
+    </div>
+  </PageHero>
 
   <section class="section">
     <div class="container grid grid--3">
@@ -63,8 +68,8 @@ import { marina } from '../data/marina';
         </p>
       </div>
       <div class="grid grid--3">
-        <div class="card"><h3>Call ahead</h3><p>We have a limited number of transient slips. Call <a href={marina.phone.mainHref}>{marina.phone.main}</a> or hail us on arrival so we can have a spot ready.</p></div>
-        <div class="card"><h3>Nightly rate</h3><p>Transient dockage is priced per foot per night and includes electric. Weekly rates available. Call for current pricing.</p></div>
+        <div class="card"><h3>Book online</h3><p>Transient dockage can be reserved through Dockwa, where you can see availability and request your dates in a minute.</p><p><a class="btn btn--primary" href={marina.portalUrl} target="_blank" rel="noopener">Reserve on Dockwa</a></p></div>
+        <div class="card"><h3>Or call ahead</h3><p>Prefer to talk to a person? Call <a href={marina.phone.mainHref}>{marina.phone.main}</a> or hail us on arrival. Transient dockage is priced per foot per night and includes electric.</p></div>
         <div class="card"><h3>In town</h3><p>Downtown Decatur's restaurants and historic districts are minutes away, and the Hard Dock is right here on property.</p></div>
       </div>
     </div>
