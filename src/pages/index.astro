@@ -154,6 +154,23 @@ const hasPoster = inPublic(marina.hero.poster);
   <CallToAction />
 </Base>
 
+<script>
+  // Safari sometimes leaves a muted autoplay video paused (Low Power Mode,
+  // per-site Auto-Play settings, or the poster winning the race). Set the
+  // properties explicitly and ask it to play once it can.
+  const video = document.querySelector<HTMLVideoElement>('.hero-video');
+  if (video && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    const tryPlay = () => video.play().catch(() => {});
+    if (video.readyState >= 2) tryPlay();
+    video.addEventListener('canplay', tryPlay, { once: true });
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && video.paused) tryPlay(); });
+    document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
+  }
+</script>
+
 <style>
   .hero { position: relative; isolation: isolate; overflow: hidden; color: #fff; min-height: min(82vh, 760px); display: flex; align-items: center; text-align: center; }
   .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
