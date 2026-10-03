@@ -156,6 +156,17 @@ export const marina = {
   ],
 
   /**
+   * Home page hero media. Files live in /public. If the video is missing at
+   * build time the illustrated scene is shown instead. Keep the video short
+   * (10–20 s), muted, and under ~5 MB; the poster shows while it loads.
+   */
+  hero: {
+    video: '/videos/hero.mp4',
+    videoWebm: '/videos/hero.webm',
+    poster: '/images/hero-poster.jpg',
+  },
+
+  /**
    * Contact form handling. Leave empty to fall back to an email link.
    * Examples: 'https://formspree.io/f/xxxxxxxx' or Netlify Forms (set netlify: true).
    */

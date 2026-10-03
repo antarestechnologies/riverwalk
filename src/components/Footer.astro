@@ -6,7 +6,7 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="container grid grid--4">
     <div>
-      <p class="foot-brand">{marina.name}</p>
+      <img class="foot-logo" src="/images/logo.png" alt={`${marina.name}, Decatur, Alabama, established ${marina.established}`} width="353" height="352" loading="lazy" decoding="async" />
       <p class="muted">{marina.tagline}. Locally owned and operated since {marina.established}.</p>
       {marina.social.facebook && (
         <a class="social" href={marina.social.facebook} target="_blank" rel="noopener">
@@ -50,7 +50,7 @@ const year = new Date().getFullYear();
   .site-footer a { color: #e9f1f7; }
   .site-footer a:hover { color: var(--river-400); }
   .site-footer .muted { color: #92a7b9; }
-  .foot-brand { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+  .foot-logo { width: 170px; height: auto; margin: -0.5rem 0 0.75rem; }
   .foot-head { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--river-400); margin-bottom: 0.75rem; }
   address { font-style: normal; }
   .social { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; font-weight: 600; }

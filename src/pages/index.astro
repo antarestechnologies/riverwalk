@@ -4,11 +4,30 @@ import HeroScene from '../components/HeroScene.astro';
 import Icon from '../components/Icon.astro';
 import CallToAction from '../components/CallToAction.astro';
 import { marina, fullAddress, mapsUrl } from '../data/marina';
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 const yearsServing = new Date().getFullYear() - marina.established;
+
+// Only render the <video> when the file is actually present in /public.
+const inPublic = (p: string) => existsSync(fileURLToPath(new URL(`../../public${p}`, import.meta.url)));
+const hasVideo = inPublic(marina.hero.video);
+const hasWebm = inPublic(marina.hero.videoWebm);
+const hasPoster = inPublic(marina.hero.poster);
 ---
 <Base title="Home" home>
-  <section class="hero">
+  <section class="hero" data-video={hasVideo ? 'true' : undefined}>
     <HeroScene />
+    {hasVideo && (
+      <video
+        class="hero-video"
+        autoplay muted loop playsinline preload="metadata"
+        poster={hasPoster ? marina.hero.poster : undefined}
+        aria-hidden="true" tabindex="-1"
+      >
+        {hasWebm && <source src={marina.hero.videoWebm} type="video/webm" />}
+        <source src={marina.hero.video} type="video/mp4" />
+      </video>
+    )}
     <div class="container hero-inner">
       <span class="eyebrow">Wheeler Lake · Decatur, Alabama</span>
       <h1>{marina.tagline}</h1>
@@ -136,6 +155,8 @@ const yearsServing = new Date().getFullYear() - marina.established;
 
 <style>
   .hero { position: relative; isolation: isolate; overflow: hidden; color: #fff; min-height: min(78vh, 720px); display: flex; align-items: center; }
+  .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  @media (prefers-reduced-motion: reduce) { .hero-video { display: none; } }
   .hero::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(11,31,51,.72) 0%, rgba(11,31,51,.35) 55%, rgba(11,31,51,0) 100%); }
   .hero-inner { position: relative; z-index: 2; padding-block: clamp(4rem, 10vw, 7rem); max-width: 720px; margin-left: max(var(--gutter), calc((100% - var(--container)) / 2)); }
   .hero .eyebrow { color: #ffd08a; }

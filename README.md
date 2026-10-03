@@ -35,6 +35,19 @@ confirmed before launch:
 Page copy lives in `src/pages/*.astro`. Shared pieces are in `src/components/` and the global styles and design tokens
 in `src/styles/global.css`.
 
+## Logo
+
+`public/images/logo.png` is the full logo (white on transparent) used in the footer and social image, and
+`public/images/logo-anchor.png` is the anchor alone, used in the header and the favicons. Regenerate the favicons and
+`og.png` if the logo changes.
+
+## Hero video
+
+The home page hero plays a muted, looping background video when `public/videos/hero.mp4` exists (and `hero.webm` if
+present), with `public/images/hero-poster.jpg` shown while it loads. Without those files the illustrated scene is
+used. Keep the clip short and small (about 10–20 seconds, under 5 MB) so the page stays fast on phones. Visitors who
+have "reduce motion" turned on see the poster or illustration instead.
+
 ## Photos
 
 The site currently uses an illustrated hero (`src/components/HeroScene.astro`) because no photography was available.
