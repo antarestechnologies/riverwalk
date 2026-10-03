@@ -64,6 +64,9 @@ npm run check     # type-check the Astro files
 
 ## Deploying
 
+The repo includes a `vercel.json` that tells Vercel to use the Astro preset, so the project's Framework Preset setting
+in the Vercel dashboard can stay on whatever it defaults to.
+
 `npm run build` produces a static `dist/` folder. It deploys unchanged to Netlify, Vercel, Cloudflare Pages,
 GitHub Pages or any web host. Set `site` in `astro.config.mjs` to the final domain so the sitemap, canonical URLs and
 social previews point at the right place.
