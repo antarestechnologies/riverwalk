@@ -5,6 +5,7 @@ import CallToAction from '../components/CallToAction.astro';
 import Icon from '../components/Icon.astro';
 import { marina } from '../data/marina';
 const services = marina.services.filter((s) => !['storage', 'rentals'].includes(s.slug));
+const fuelUpdated = new Date(marina.fuel.updated + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 ---
 <Base title="Fuel & Services" description="Fuel dock with gas and diesel, boat ramp, ship store, and hull, engine and propeller repair at Riverwalk Marina in Decatur, Alabama.">
   <PageHero eyebrow="Fuel & services" title="Fuel, parts and repairs without leaving the water."
@@ -21,9 +22,9 @@ const services = marina.services.filter((s) => !['storage', 'rentals'].includes(
             <p>{s.details}</p>
             {s.slug === 'fuel' && (
               <ul class="check-list">
-                <li>Gasoline and diesel</li>
-                <li>Attendant on duty during marina hours</li>
-                <li>Pump-out available on request</li>
+                <li>Regular gas and diesel</li>
+                <li>Staff on hand during marina hours</li>
+                <li>Floating dock with {marina.water.docksideDepth} of water alongside</li>
                 <li>Ice and cold drinks a few steps away</li>
               </ul>
             )}
@@ -56,7 +57,16 @@ const services = marina.services.filter((s) => !['storage', 'rentals'].includes(
               <dt>Hours</dt><dd>{marina.hours.marina[0].days}, {marina.hours.marina[0].open} – {marina.hours.marina[0].close}</dd>
               <dt>Call</dt><dd><a href={marina.phone.mainHref}>{marina.phone.main}</a></dd>
               {s.slug === 'repair' && (<><dt>Scheduling</dt><dd>Call ahead to book service; drop-offs by appointment.</dd></>)}
-              {s.slug === 'fuel' && (<><dt>By water</dt><dd>{marina.water.mileMarker}. Fuel dock is on the floating dock nearest the channel.</dd></>)}
+              {s.slug === 'fuel' && (<>
+                <dt>Current prices</dt>
+                <dd>
+                  <table class="prices">
+                    {marina.fuel.items.map((f) => (<tr><td>{f.label}</td><td>${f.price.toFixed(2)}/gal</td></tr>))}
+                  </table>
+                  <small>Updated {fuelUpdated}. {marina.fuel.note}</small>
+                </dd>
+                <dt>By water</dt><dd>{marina.water.mileMarker}. Fuel dock is on the floating dock nearest the channel.</dd>
+              </>)}
             </dl>
           </div>
         </article>
@@ -77,4 +87,8 @@ const services = marina.services.filter((s) => !['storage', 'rentals'].includes(
   .panel dt:first-child { margin-top: 0; }
   .panel dd { margin: 0; font-weight: 600; color: #fff; }
   .panel a { color: #ffd08a; }
+  .prices { width: 100%; border-collapse: collapse; margin: .25rem 0 .5rem; }
+  .prices td { padding: .35rem 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+  .prices td:last-child { text-align: right; font-family: var(--font-display); font-size: 1.3rem; color: #ffd08a; }
+  .panel small { display: block; font-weight: 400; color: #b8c9d7; line-height: 1.4; }
 </style>

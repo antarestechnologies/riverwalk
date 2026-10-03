@@ -49,7 +49,7 @@ const hasPoster = inPublic(marina.hero.poster);
         <div class="fact"><dt>Marina hours</dt><dd>{marina.hours.marina[0].days}, {marina.hours.marina[0].open} – {marina.hours.marina[0].close}</dd></div>
         <div class="fact"><dt>Location</dt><dd>{marina.water.mileMarker}</dd></div>
         <div class="fact"><dt>Depth</dt><dd>{marina.water.approachDepth} approach & dockside</dd></div>
-        <div class="fact"><dt>Fuel</dt><dd>Gas & diesel on the dock</dd></div>
+        <div class="fact"><dt>Fuel on the dock</dt><dd>{marina.fuel.items.map((f, i) => (<>{i > 0 && ' · '}{f.label} ${f.price.toFixed(2)}</>))}</dd></div>
       </dl>
     </div>
   </section>

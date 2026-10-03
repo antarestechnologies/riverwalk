@@ -47,6 +47,22 @@ export const marina = {
     note: 'Fuel dock and ship store follow marina hours. After-hours fuel is not available.',
   },
 
+  /**
+   * Fuel prices shown on the home page and the fuel section. Update the
+   * prices and the date together whenever the pump price changes.
+   */
+  fuel: {
+    updated: '2026-07-21',
+    items: [
+      { label: 'Regular gas', price: 4.99 },
+      { label: 'Diesel', price: 4.99 },
+    ],
+    note: 'Prices are per gallon and can change daily. Call to confirm before a long run.',
+  },
+
+  /** Dockwa reservation policy. */
+  cancellationPolicy: '24-hour cancellation',
+
   water: {
     body: 'Wheeler Lake, Tennessee River',
     mileMarker: 'TRM 305.0, right descending bank',
@@ -68,9 +84,9 @@ export const marina = {
     {
       slug: 'fuel',
       title: 'Fuel Dock',
-      short: 'Non-ethanol gas and diesel, right at the water.',
+      short: 'Regular gas and diesel, right at the water.',
       details:
-        'Pull up to our floating fuel dock for gasoline and diesel. Attendants are on hand during marina hours to help you tie up and top off. Pump-out available on request.',
+        'Pull up to our floating fuel dock for regular gas and diesel. Staff are on hand during marina hours to help you tie up and top off.',
       icon: 'fuel',
     },
     {

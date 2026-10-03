@@ -36,6 +36,11 @@ in `src/styles/global.css`.
 The Hard Dock restaurant has closed, so there is no restaurant page. `/hard-dock/` redirects to the home page in
 case old links are still out there.
 
+## Fuel prices
+
+Pump prices live in `src/data/marina.ts` under `fuel`, with the date they were last changed. Update both together;
+the home page and the fuel section read from there, and the date is shown so boaters know how fresh the number is.
+
 ## Logo
 
 `public/images/logo.png` is the full logo (white on transparent) used in the footer and social image, and
