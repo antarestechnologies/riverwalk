@@ -31,6 +31,9 @@ export const marina = {
   },
   email: '', // VERIFY: add the marina's public email when known
 
+  /** Slip-holder / customer portal link shown in the nav when set. VERIFY: get the URL from the current site. */
+  portalUrl: '',
+
   social: {
     facebook: 'https://www.facebook.com/riverwalksteve/', // VERIFY
   },

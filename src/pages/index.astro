@@ -29,8 +29,9 @@ const hasPoster = inPublic(marina.hero.poster);
       </video>
     )}
     <div class="container hero-inner">
-      <span class="eyebrow">Wheeler Lake · Decatur, Alabama</span>
-      <h1>{marina.tagline}</h1>
+      <img class="hero-logo" src="/images/logo.png" alt="" width="353" height="352" loading="eager" decoding="async" fetchpriority="high" />
+      <h1 class="visually-hidden">{marina.name}</h1>
+      <p class="hero-title">{marina.tagline}</p>
       <p class="lead">
         Full-service marina on the Tennessee River with covered and open slips, fuel dock, boat ramp,
         ship store, repair service, rentals and waterfront dining at the Hard Dock.
@@ -154,16 +155,17 @@ const hasPoster = inPublic(marina.hero.poster);
 </Base>
 
 <style>
-  .hero { position: relative; isolation: isolate; overflow: hidden; color: #fff; min-height: min(78vh, 720px); display: flex; align-items: center; }
+  .hero { position: relative; isolation: isolate; overflow: hidden; color: #fff; min-height: min(82vh, 760px); display: flex; align-items: center; text-align: center; }
   .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   @media (prefers-reduced-motion: reduce) { .hero-video { display: none; } }
-  .hero::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(11,31,51,.72) 0%, rgba(11,31,51,.35) 55%, rgba(11,31,51,0) 100%); }
-  .hero-inner { position: relative; z-index: 2; padding-block: clamp(4rem, 10vw, 7rem); max-width: 720px; margin-left: max(var(--gutter), calc((100% - var(--container)) / 2)); }
-  .hero .eyebrow { color: #ffd08a; }
-  .hero h1 { color: #fff; text-shadow: 0 2px 20px rgba(0,0,0,.25); }
-  .hero .lead { color: #e2ecf3; }
+  .hero::before { content: ''; position: absolute; inset: 0; z-index: 1; background: radial-gradient(ellipse at center, rgba(11,31,51,.62) 0%, rgba(11,31,51,.42) 55%, rgba(11,31,51,.3) 100%); }
+  .hero-inner { position: relative; z-index: 2; padding-block: clamp(3rem, 8vw, 5rem); max-width: 760px; margin-inline: auto; display: flex; flex-direction: column; align-items: center; }
+  .hero-logo { width: clamp(180px, 26vw, 260px); height: auto; filter: drop-shadow(0 6px 24px rgba(0,0,0,.35)); margin-bottom: 1.25rem; }
+  .hero-title { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.7rem, 3.6vw, 2.6rem); line-height: 1.15; color: #fff; text-shadow: 0 2px 20px rgba(0,0,0,.3); margin: 0 0 .75rem; letter-spacing: -0.01em; }
+  .hero .lead { color: #e2ecf3; margin-inline: auto; }
+  .hero .btn-row { justify-content: center; }
   @media (max-width: 700px) {
-    .hero::before { background: linear-gradient(180deg, rgba(11,31,51,.55) 0%, rgba(11,31,51,.72) 60%, rgba(11,31,51,.85) 100%); }
+    .hero::before { background: linear-gradient(180deg, rgba(11,31,51,.5) 0%, rgba(11,31,51,.62) 50%, rgba(11,31,51,.8) 100%); }
   }
 
   .stat-block { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
