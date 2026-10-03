@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactForm from '../components/ContactForm.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Icon from '../components/Icon.astro';
+import { marina } from '../data/marina';
+---
+<Base title="Slips & Storage" description={`Covered and open wet slips, sailboat slips and transient dockage at Riverwalk Marina on Wheeler Lake in Decatur, AL. ${marina.slips.total} slips with ${marina.water.docksideDepth} dockside depth.`}>
+  <PageHero eyebrow="Slips & storage" title="A protected home for your boat on Wheeler Lake."
+    lead={`${marina.slips.total} floating slips, covered and open, with shore power, water and ${marina.water.docksideDepth} of depth right at the dock.`} />
+
+  <section class="section">
+    <div class="container grid grid--3">
+      <div class="card">
+        <div class="icon"><Icon name="anchor" /></div>
+        <h3>Covered slips</h3>
+        <p>Keep the sun and weather off your boat. Covered slips are our most popular option and typically fill by spring, so ask early.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><Icon name="waves" /></div>
+        <h3>Open slips</h3>
+        <p>Uncovered floating slips for runabouts, pontoons, cruisers and houseboats. Flexible lengths and easy in-and-out access.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><Icon name="boat" /></div>
+        <h3>Sailboat slips</h3>
+        <p>{marina.slips.sailboatSlips} open slips on C-Dock give masts full clearance, with deep water all the way to the channel.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">What's included</span>
+        <h2>Floating docks and the basics done right.</h2>
+        <ul class="check-list">
+          {marina.slips.included.map((i) => <li>{i}</li>)}
+          <li>Fuel dock, ship store and service on site</li>
+          <li>Hard Dock restaurant a short walk down the dock</li>
+        </ul>
+      </div>
+      <dl class="facts">
+        <div class="fact"><dt>Total slips</dt><dd>{marina.slips.total}</dd></div>
+        <div class="fact"><dt>Dock type</dt><dd>{marina.water.dockType}</dd></div>
+        <div class="fact"><dt>Approach depth</dt><dd>{marina.water.approachDepth}</dd></div>
+        <div class="fact"><dt>Dockside depth</dt><dd>{marina.water.docksideDepth}</dd></div>
+        <div class="fact"><dt>Minimum length</dt><dd>{marina.slips.minLength} ft</dd></div>
+        <div class="fact"><dt>River mile</dt><dd>{marina.water.mileMarker}</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section section--sand">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Passing through?</span>
+        <h2>Transient dockage for river cruisers.</h2>
+        <p class="lead">
+          Riverwalk sits at mile {marina.water.mileMarker.split(' ')[1]} on Wheeler Lake, a natural overnight stop between
+          Guntersville and Wheeler dams. Tie up, fuel up, walk to dinner and sleep well.
+        </p>
+      </div>
+      <div class="grid grid--3">
+        <div class="card"><h3>Call ahead</h3><p>We have a limited number of transient slips. Call <a href={marina.phone.mainHref}>{marina.phone.main}</a> or hail us on arrival so we can have a spot ready.</p></div>
+        <div class="card"><h3>Nightly rate</h3><p>Transient dockage is priced per foot per night and includes electric. Weekly rates available. Call for current pricing.</p></div>
+        <div class="card"><h3>In town</h3><p>Downtown Decatur's restaurants and historic districts are minutes away, and the Hard Dock is right here on property.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Long-term storage</span>
+        <h2>Leave the trailer at home.</h2>
+        <p>
+          Seasonal and annual slip leases keep your boat ready to go whenever you are. Pull in, step aboard and head out.
+          Our staff is on site seven days a week, and the docks are lighted and monitored.
+        </p>
+        <p class="muted">Rates depend on slip size and whether the slip is covered. Call the office for a current rate sheet and availability.</p>
+      </div>
+      <div class="notice">
+        <strong>Slip inquiry checklist.</strong> Have your boat's length overall, beam and draft handy, plus the dates you are looking at. That lets us match you to the right slip on the first call.
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white" id="inquire">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Slip inquiry</span>
+        <h2>Ask about availability.</h2>
+        <p class="lead">Tell us about your boat and when you would like to come in. We will get back to you with options and pricing.</p>
+      </div>
+      <ContactForm subject="Slip inquiry" topics={['Covered slip', 'Open slip', 'Sailboat slip', 'Transient dockage', 'Long-term storage']} />
+    </div>
+  </section>
+
+  <CallToAction title="Questions about slips?" text="The marina office can check availability and pricing while you are on the phone." />
+</Base>

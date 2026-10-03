@@ -1,0 +1,86 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { marina, fullAddress } from '../data/marina';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Set to true on the home page to use the plain site name as the title. */
+  home?: boolean;
+}
+const { title, description = marina.description, home = false } = Astro.props;
+const fullTitle = home ? `${marina.name} | ${marina.address.city}, ${marina.address.state}` : `${title} | ${marina.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': ['Marina', 'LocalBusiness'],
+  name: marina.name,
+  legalName: marina.legalName,
+  description: marina.description,
+  url: Astro.site?.toString(),
+  telephone: marina.phone.main,
+  foundingDate: String(marina.established),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: marina.address.street,
+    addressLocality: marina.address.city,
+    addressRegion: marina.address.state,
+    postalCode: marina.address.zip,
+    addressCountry: 'US',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: marina.geo.lat, longitude: marina.geo.lng },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '08:00',
+      closes: '17:00',
+    },
+  ],
+  sameAs: Object.values(marina.social).filter(Boolean),
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#0b1f33" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={marina.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/images/og.png', Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="geo.placename" content={fullAddress} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  body { display: flex; flex-direction: column; min-height: 100vh; }
+  main { flex: 1; }
+</style>

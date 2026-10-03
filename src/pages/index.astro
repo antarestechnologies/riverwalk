@@ -1,0 +1,165 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroScene from '../components/HeroScene.astro';
+import Icon from '../components/Icon.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { marina, fullAddress, mapsUrl } from '../data/marina';
+const yearsServing = new Date().getFullYear() - marina.established;
+---
+<Base title="Home" home>
+  <section class="hero">
+    <HeroScene />
+    <div class="container hero-inner">
+      <span class="eyebrow">Wheeler Lake · Decatur, Alabama</span>
+      <h1>{marina.tagline}</h1>
+      <p class="lead">
+        Full-service marina on the Tennessee River with covered and open slips, fuel dock, boat ramp,
+        ship store, repair service, rentals and waterfront dining at the Hard Dock.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="/slips/">Find a slip</a>
+        <a class="btn btn--ghost" href={marina.phone.mainHref}><Icon name="phone" class="btn-icon" /> {marina.phone.main}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <dl class="facts">
+        <div class="fact"><dt>Marina hours</dt><dd>{marina.hours.marina[0].days}, {marina.hours.marina[0].open} – {marina.hours.marina[0].close}</dd></div>
+        <div class="fact"><dt>Location</dt><dd>{marina.water.mileMarker}</dd></div>
+        <div class="fact"><dt>Depth</dt><dd>{marina.water.approachDepth} approach & dockside</dd></div>
+        <div class="fact"><dt>Fuel</dt><dd>Gas & diesel on the dock</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Everything in one place</span>
+        <h2>Fuel up, launch, store, fix, rent, eat.</h2>
+        <p class="lead">Whether you keep your boat here year-round or are passing through on the river, we have what you need.</p>
+      </div>
+      <div class="grid grid--3">
+        {marina.services.map((s) => (
+          <a class="card card--link" href={s.slug === 'storage' ? '/slips/' : s.slug === 'rentals' ? '/rentals/' : `/services/#${s.slug}`}>
+            <div class="icon"><Icon name={s.icon} /></div>
+            <h3>{s.title}</h3>
+            <p>{s.short}</p>
+            <p class="more">Learn more →</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Slips & storage</span>
+        <h2>{marina.slips.total} slips, covered and open, with room for sailboats.</h2>
+        <p>
+          Floating docks, {marina.water.docksideDepth} of water at the slip, shore power and fresh water. Sailboats are
+          welcome on C-Dock, where open slips give masts plenty of clearance. Transient dockage is available for boaters
+          cruising the Tennessee River.
+        </p>
+        <ul class="check-list">
+          {marina.slips.types.map((t) => <li>{t}</li>)}
+        </ul>
+        <div class="btn-row mt-2">
+          <a class="btn btn--primary" href="/slips/">Slip details</a>
+          <a class="btn btn--outline" href="/visit/#contact">Ask about availability</a>
+        </div>
+      </div>
+      <div class="stat-block">
+        <div class="stat"><span class="num">{marina.slips.total}</span><span class="lbl">Wet slips</span></div>
+        <div class="stat"><span class="num">{marina.slips.sailboatSlips}</span><span class="lbl">Sailboat slips on C-Dock</span></div>
+        <div class="stat"><span class="num">{marina.water.docksideDepth}</span><span class="lbl">Dockside depth</span></div>
+        <div class="stat"><span class="num">{yearsServing}+</span><span class="lbl">Years on the river</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand">
+    <div class="container split split--rev">
+      <div class="dock-card">
+        <div class="icon"><Icon name="utensils" /></div>
+        <h3>{marina.restaurant.name}</h3>
+        <p class="muted">{marina.restaurant.tagline}</p>
+        <table class="hours">
+          {marina.restaurant.hours.map((h) => (
+            <tr><td>{h.days}</td><td>{h.close ? `${h.open} – ${h.close}` : h.open}</td></tr>
+          ))}
+        </table>
+        <p class="muted" style="margin-top:.75rem;font-size:.9rem">{marina.restaurant.hoursNote}</p>
+      </div>
+      <div>
+        <span class="eyebrow">Eat on the water</span>
+        <h2>Dinner and drinks on the deck at the Hard Dock.</h2>
+        <p>{marina.restaurant.description}</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="/hard-dock/">About the Hard Dock</a>
+          <a class="btn btn--outline" href={`tel:${marina.restaurant.phoneHref}`}>{marina.restaurant.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Getting here</span>
+        <h2>Minutes from downtown Decatur and I-65.</h2>
+        <p>
+          You will find us on Highway 31 at the foot of the Hudson Memorial Bridge, where the river meets the city.
+          By water, look for us at {marina.water.mileMarker} on Wheeler Lake.
+        </p>
+        <dl class="drive">
+          {marina.driving.map((d) => (<div><dt>{d.from}</dt><dd>{d.time}</dd></div>))}
+        </dl>
+        <div class="btn-row mt-2">
+          <a class="btn btn--primary" href={mapsUrl} target="_blank" rel="noopener"><Icon name="pin" class="btn-icon" /> Get directions</a>
+          <a class="btn btn--outline" href="/visit/">Visit & contact</a>
+        </div>
+      </div>
+      <div class="addr-card">
+        <Icon name="pin" />
+        <p class="addr">{fullAddress}</p>
+        <p class="muted">{marina.address.landmark}</p>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction />
+</Base>
+
+<style>
+  .hero { position: relative; isolation: isolate; overflow: hidden; color: #fff; min-height: min(78vh, 720px); display: flex; align-items: center; }
+  .hero::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(11,31,51,.72) 0%, rgba(11,31,51,.35) 55%, rgba(11,31,51,0) 100%); }
+  .hero-inner { position: relative; z-index: 2; padding-block: clamp(4rem, 10vw, 7rem); max-width: 720px; margin-left: max(var(--gutter), calc((100% - var(--container)) / 2)); }
+  .hero .eyebrow { color: #ffd08a; }
+  .hero h1 { color: #fff; text-shadow: 0 2px 20px rgba(0,0,0,.25); }
+  .hero .lead { color: #e2ecf3; }
+  @media (max-width: 700px) {
+    .hero::before { background: linear-gradient(180deg, rgba(11,31,51,.55) 0%, rgba(11,31,51,.72) 60%, rgba(11,31,51,.85) 100%); }
+  }
+
+  .stat-block { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .stat { background: var(--navy-900); color: #fff; border-radius: var(--radius); padding: 1.5rem; display: grid; gap: .25rem; }
+  .stat .num { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; line-height: 1; color: #ffd08a; }
+  .stat .lbl { color: #b8c9d7; font-size: .95rem; }
+
+  .dock-card { background: var(--surface); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow); }
+  .dock-card h3 { font-size: 1.8rem; margin-top: 1rem; margin-bottom: .2rem; }
+
+  .drive { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem 1.5rem; margin: 1.5rem 0 0; }
+  .drive div { border-top: 2px solid var(--river-100); padding-top: .5rem; }
+  .drive dt { font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-500); font-weight: 700; }
+  .drive dd { margin: 0; font-weight: 600; }
+
+  .addr-card { background: var(--navy-900); color: #fff; border-radius: var(--radius); padding: 2.5rem; display: grid; gap: .5rem; }
+  .addr-card :global(svg) { width: 40px; height: 40px; color: #ffd08a; }
+  .addr-card .addr { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; margin: .5rem 0 0; }
+  .addr-card .muted { color: #b8c9d7; }
+</style>

@@ -1,0 +1,26 @@
+---
+import { marina } from '../data/marina';
+import Icon from './Icon.astro';
+interface Props { title?: string; text?: string }
+const {
+  title = 'Ready to get on the water?',
+  text = 'Call the marina office for slip availability, fuel, service appointments and rentals. We are open seven days a week.',
+} = Astro.props;
+---
+<section class="section section--navy">
+  <div class="container cta">
+    <div>
+      <h2>{title}</h2>
+      <p class="lead">{text}</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn--primary" href={marina.phone.mainHref}><Icon name="phone" class="btn-icon" /> {marina.phone.main}</a>
+      <a class="btn btn--ghost" href="/visit/#contact">Send a message</a>
+    </div>
+  </div>
+</section>
+<style>
+  .cta { display: grid; gap: 1.5rem; align-items: center; }
+  .cta .lead { color: #b8c9d7; margin-bottom: 0; }
+  @media (min-width: 880px) { .cta { grid-template-columns: 1.4fr 1fr; } .cta .btn-row { justify-content: flex-end; } }
+</style>

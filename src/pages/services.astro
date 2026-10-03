@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Icon from '../components/Icon.astro';
+import { marina } from '../data/marina';
+const services = marina.services.filter((s) => !['storage', 'rentals'].includes(s.slug));
+---
+<Base title="Fuel & Services" description="Fuel dock with gas and diesel, boat ramp, ship store, and hull, engine and propeller repair at Riverwalk Marina in Decatur, Alabama.">
+  <PageHero eyebrow="Fuel & services" title="Fuel, parts and repairs without leaving the water."
+    lead="Pull up to the fuel dock, grab what you need in the ship store, and let our service team handle the rest." />
+
+  <section class="section">
+    <div class="container services">
+      {services.map((s, i) => (
+        <article class={`split ${i % 2 ? 'split--rev' : ''}`} id={s.slug}>
+          <div>
+            <div class="icon"><Icon name={s.icon} /></div>
+            <h2>{s.title}</h2>
+            <p class="lead">{s.short}</p>
+            <p>{s.details}</p>
+            {s.slug === 'fuel' && (
+              <ul class="check-list">
+                <li>Gasoline and diesel</li>
+                <li>Attendant on duty during marina hours</li>
+                <li>Pump-out available on request</li>
+                <li>Ice and cold drinks a few steps away</li>
+              </ul>
+            )}
+            {s.slug === 'repair' && (
+              <ul class="check-list">
+                <li>Engine service and diagnostics</li>
+                <li>Hull and fiberglass repair</li>
+                <li>Propeller repair and replacement</li>
+                <li>Winterization and spring commissioning</li>
+              </ul>
+            )}
+            {s.slug === 'store' && (
+              <ul class="check-list">
+                <li>Engine parts, oil and fluids</li>
+                <li>Safety gear, lines and fenders</li>
+                <li>Cleaning supplies</li>
+                <li>Ice, snacks and drinks</li>
+              </ul>
+            )}
+            {s.slug === 'ramp' && (
+              <ul class="check-list">
+                <li>Concrete ramp with courtesy dock</li>
+                <li>Trailer and vehicle parking</li>
+                <li>Fuel and supplies right at the top of the ramp</li>
+              </ul>
+            )}
+          </div>
+          <div class="panel">
+            <dl>
+              <dt>Hours</dt><dd>{marina.hours.marina[0].days}, {marina.hours.marina[0].open} – {marina.hours.marina[0].close}</dd>
+              <dt>Call</dt><dd><a href={marina.phone.mainHref}>{marina.phone.main}</a></dd>
+              {s.slug === 'repair' && (<><dt>Scheduling</dt><dd>Call ahead to book service; drop-offs by appointment.</dd></>)}
+              {s.slug === 'fuel' && (<><dt>By water</dt><dd>{marina.water.mileMarker}. Fuel dock is on the floating dock nearest the channel.</dd></>)}
+            </dl>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <CallToAction title="Need service or have a question?" text="Call the marina office to schedule repair work, check fuel availability or ask about parts." />
+</Base>
+
+<style>
+  .services { display: grid; gap: clamp(3rem, 7vw, 5rem); }
+  .services article { scroll-margin-top: 90px; }
+  .services h2 { margin-top: 1rem; }
+  .panel { background: var(--navy-900); color: #d8e4ee; border-radius: var(--radius); padding: 2rem; }
+  .panel dl { margin: 0; display: grid; gap: .25rem 1rem; }
+  .panel dt { font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--river-400); font-weight: 700; margin-top: 1rem; }
+  .panel dt:first-child { margin-top: 0; }
+  .panel dd { margin: 0; font-weight: 600; color: #fff; }
+  .panel a { color: #ffd08a; }
+</style>

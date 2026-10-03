@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Icon from '../components/Icon.astro';
+import { marina, fullAddress, mapsUrl, mapsEmbedUrl } from '../data/marina';
+---
+<Base title="Visit & Contact" description={`Riverwalk Marina is at ${fullAddress}, on Wheeler Lake at the Hudson Memorial Bridge. Hours, directions by car and by water, and how to reach the marina office.`}>
+  <PageHero eyebrow="Visit & contact" title="Find us at the foot of the bridge." lead="On Highway 31 where Decatur meets the Tennessee River. Open seven days a week." />
+
+  <section class="section">
+    <div class="container grid grid--3">
+      <div class="card">
+        <div class="icon"><Icon name="pin" /></div>
+        <h3>Address</h3>
+        <p><a href={mapsUrl} target="_blank" rel="noopener">{fullAddress}</a></p>
+        <p class="muted mb-0">{marina.address.landmark}</p>
+      </div>
+      <div class="card">
+        <div class="icon"><Icon name="clock" /></div>
+        <h3>Marina hours</h3>
+        {marina.hours.marina.map((h) => <p><strong>{h.days}</strong><br />{h.open} – {h.close}</p>)}
+        <p class="muted mb-0" style="font-size:.92rem">{marina.hours.note}</p>
+      </div>
+      <div class="card">
+        <div class="icon"><Icon name="phone" /></div>
+        <h3>Phone</h3>
+        <p>Marina office: <a href={marina.phone.mainHref}>{marina.phone.main}</a></p>
+        {marina.phone.alt && <p>Alternate: <a href={marina.phone.altHref}>{marina.phone.alt}</a></p>}
+        <p class="mb-0">{marina.restaurant.name}: <a href={`tel:${marina.restaurant.phoneHref}`}>{marina.restaurant.phone}</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">By car</span>
+        <h2>Just off I-65 and Highway 31.</h2>
+        <p>From I-65, take the Highway 31 exit toward Decatur and follow Highway 31 to the river. The marina entrance is at the Hudson Memorial Bridge on the Decatur side.</p>
+        <dl class="drive">
+          {marina.driving.map((d) => (<div><dt>{d.from}</dt><dd>{d.time}</dd></div>))}
+        </dl>
+        <span class="eyebrow mt-2" style="display:block">By water</span>
+        <p>Riverwalk Marina is on Wheeler Lake at <strong>{marina.water.mileMarker}</strong>, just downstream of the Highway 31 bridges. Approach and dockside depth is {marina.water.approachDepth}. Call the office on your way in for a slip assignment.</p>
+      </div>
+      <div class="map">
+        <iframe
+          title="Map to Riverwalk Marina"
+          src={mapsEmbedUrl}
+          width="100%" height="420" style="border:0" loading="lazy" allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="contact">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Contact</span>
+        <h2>Send us a message.</h2>
+        <p class="lead">Questions about slips, service, rentals or the Hard Dock? Fill out the form and we will get back to you, or call during marina hours for the fastest answer.</p>
+        {marina.social.facebook && (
+          <p><a href={marina.social.facebook} target="_blank" rel="noopener">Follow us on Facebook</a> for weather closures, events and specials.</p>
+        )}
+      </div>
+      <ContactForm />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .drive { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem 1.5rem; margin: 1.5rem 0 0; }
+  .drive div { border-top: 2px solid var(--river-100); padding-top: .5rem; }
+  .drive dt { font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-500); font-weight: 700; }
+  .drive dd { margin: 0; font-weight: 600; }
+  .map { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+</style>

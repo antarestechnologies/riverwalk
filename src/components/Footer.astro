@@ -1,0 +1,62 @@
+---
+import { marina, nav, fullAddress, mapsUrl } from '../data/marina';
+import Icon from './Icon.astro';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container grid grid--4">
+    <div>
+      <p class="foot-brand">{marina.name}</p>
+      <p class="muted">{marina.tagline}. Locally owned and operated since {marina.established}.</p>
+      {marina.social.facebook && (
+        <a class="social" href={marina.social.facebook} target="_blank" rel="noopener">
+          <Icon name="facebook" /> Follow us on Facebook
+        </a>
+      )}
+    </div>
+    <div>
+      <p class="foot-head">Visit</p>
+      <address>
+        <a href={mapsUrl} target="_blank" rel="noopener">{fullAddress}</a><br />
+        <span class="muted">{marina.address.landmark}</span>
+      </address>
+      <p class="muted" style="margin-top:.6rem">{marina.water.mileMarker}</p>
+    </div>
+    <div>
+      <p class="foot-head">Hours</p>
+      {marina.hours.marina.map((h) => (
+        <p><strong>{h.days}</strong><br />{h.open} – {h.close}</p>
+      ))}
+      <p class="muted">Hard Dock keeps its own hours. <a href="/hard-dock/">See details</a>.</p>
+    </div>
+    <div>
+      <p class="foot-head">Contact</p>
+      <p><a href={marina.phone.mainHref}>{marina.phone.main}</a></p>
+      {marina.phone.alt && <p><a href={marina.phone.altHref}>{marina.phone.alt}</a></p>}
+      {marina.email && <p><a href={`mailto:${marina.email}`}>{marina.email}</a></p>}
+      <ul class="foot-nav">
+        {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+      </ul>
+    </div>
+  </div>
+  <div class="container legal">
+    <p>© {year} {marina.legalName}. All rights reserved.</p>
+    <p class="muted">Rates, hours and availability subject to change. Please call to confirm.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--navy-900); color: #c3d3e0; padding: 3.5rem 0 2rem; margin-top: auto; }
+  .site-footer a { color: #e9f1f7; }
+  .site-footer a:hover { color: var(--river-400); }
+  .site-footer .muted { color: #92a7b9; }
+  .foot-brand { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+  .foot-head { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--river-400); margin-bottom: 0.75rem; }
+  address { font-style: normal; }
+  .social { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; font-weight: 600; }
+  .social :global(svg) { width: 20px; height: 20px; }
+  .foot-nav { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0.3rem; }
+  .foot-nav a { text-decoration: none; font-size: 0.95rem; }
+  .legal { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.12); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem; font-size: 0.9rem; }
+  .legal p { margin: 0; }
+</style>
