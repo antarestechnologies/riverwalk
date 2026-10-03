@@ -27,7 +27,6 @@ import { marina, fullAddress, mapsUrl, mapsEmbedUrl } from '../data/marina';
         <h3>Phone</h3>
         <p>Marina office: <a href={marina.phone.mainHref}>{marina.phone.main}</a></p>
         {marina.phone.alt && <p>Alternate: <a href={marina.phone.altHref}>{marina.phone.alt}</a></p>}
-        <p class="mb-0">{marina.restaurant.name}: <a href={`tel:${marina.restaurant.phoneHref}`}>{marina.restaurant.phone}</a></p>
       </div>
     </div>
   </section>
@@ -59,7 +58,7 @@ import { marina, fullAddress, mapsUrl, mapsEmbedUrl } from '../data/marina';
       <div>
         <span class="eyebrow">Contact</span>
         <h2>Send us a message.</h2>
-        <p class="lead">Questions about slips, service, rentals or the Hard Dock? Fill out the form and we will get back to you, or call during marina hours for the fastest answer.</p>
+        <p class="lead">Questions about slips, service or rentals? Fill out the form and we will get back to you, or call during marina hours for the fastest answer.</p>
         {marina.social.facebook && (
           <p><a href={marina.social.facebook} target="_blank" rel="noopener">Follow us on Facebook</a> for weather closures, events and specials.</p>
         )}

@@ -9,31 +9,32 @@ HTML, CSS and a tiny bit of JavaScript for the mobile menu and contact form.
 
 | Path          | Purpose                                                      |
 | ------------- | ------------------------------------------------------------ |
-| `/`           | Home: hero, quick facts, services grid, slips, Hard Dock, directions |
+| `/`           | Home: hero, quick facts, services grid, slips, rentals, directions |
 | `/slips/`     | Covered, open and sailboat slips, transient dockage, storage, slip inquiry form |
 | `/services/`  | Fuel dock, boat ramp, ship store, service & repair           |
 | `/rentals/`   | Pontoons, kayaks, canoes, paddleboards, rental request form  |
-| `/hard-dock/` | The Hard Dock restaurant                                     |
 | `/visit/`     | Address, hours, phone, map, directions by car and water, contact form |
 | `/404`        | Not-found page                                               |
 
 ## Editing content
 
 Almost every fact on the site lives in **`src/data/marina.ts`**: address, phones, hours, slip counts, depths,
-services, rental descriptions, restaurant hours, drive times and social links. Change it there and every page updates.
+services, rental descriptions, drive times and social links. Change it there and every page updates.
 
 Items marked `VERIFY` in that file came from public directory listings rather than the marina itself and should be
 confirmed before launch:
 
 - Street address suffix (N vs S) and ZIP (35601 vs 35603)
 - Second phone number
-- Hard Dock hours (they have changed over the past few seasons)
 - Map coordinates
 - Facebook URL and a public email address (currently empty)
 - Rental age/licence requirements and the "what's included" lists are reasonable defaults, not confirmed policy
 
 Page copy lives in `src/pages/*.astro`. Shared pieces are in `src/components/` and the global styles and design tokens
 in `src/styles/global.css`.
+
+The Hard Dock restaurant has closed, so there is no restaurant page. `/hard-dock/` redirects to the home page in
+case old links are still out there.
 
 ## Logo
 

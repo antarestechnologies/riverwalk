@@ -8,4 +8,6 @@ export default defineConfig({
   trailingSlash: 'always',
   integrations: [sitemap()],
   build: { format: 'directory' },
+  // The Hard Dock restaurant closed; keep old links from 404ing.
+  redirects: { '/hard-dock/': '/' },
 });

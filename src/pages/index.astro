@@ -34,7 +34,7 @@ const hasPoster = inPublic(marina.hero.poster);
       <p class="hero-title">{marina.tagline}</p>
       <p class="lead">
         Full-service marina on the Tennessee River with covered and open slips, fuel dock, boat ramp,
-        ship store, repair service, rentals and waterfront dining at the Hard Dock.
+        ship store, repair service and rentals, minutes from downtown Decatur.
       </p>
       <div class="btn-row">
         <a class="btn btn--primary" href="/slips/">Find a slip</a>
@@ -58,7 +58,7 @@ const hasPoster = inPublic(marina.hero.poster);
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Everything in one place</span>
-        <h2>Fuel up, launch, store, fix, rent, eat.</h2>
+        <h2>Fuel up, launch, store, fix, rent.</h2>
         <p class="lead">Whether you keep your boat here year-round or are passing through on the river, we have what you need.</p>
       </div>
       <div class="grid grid--3">
@@ -104,23 +104,26 @@ const hasPoster = inPublic(marina.hero.poster);
   <section class="section section--sand">
     <div class="container split split--rev">
       <div class="dock-card">
-        <div class="icon"><Icon name="utensils" /></div>
-        <h3>{marina.restaurant.name}</h3>
-        <p class="muted">{marina.restaurant.tagline}</p>
-        <table class="hours">
-          {marina.restaurant.hours.map((h) => (
-            <tr><td>{h.days}</td><td>{h.close ? `${h.open} – ${h.close}` : h.open}</td></tr>
-          ))}
-        </table>
-        <p class="muted" style="margin-top:.75rem;font-size:.9rem">{marina.restaurant.hoursNote}</p>
+        <div class="icon"><Icon name="paddle" /></div>
+        <h3>Rentals</h3>
+        <p class="muted">Pontoons, kayaks, canoes and paddleboards</p>
+        <ul class="check-list">
+          {marina.rentals.map((r) => <li>{r.title}</li>)}
+          <li>Life jackets and paddles included</li>
+          <li>Hourly, half-day and full-day rates</li>
+        </ul>
+        <p class="muted" style="margin-top:.9rem;font-size:.9rem;margin-bottom:0">Reserve by phone. Summer weekends fill up fast.</p>
       </div>
       <div>
-        <span class="eyebrow">Eat on the water</span>
-        <h2>Dinner and drinks on the deck at the Hard Dock.</h2>
-        <p>{marina.restaurant.description}</p>
+        <span class="eyebrow">No boat? No problem.</span>
+        <h2>Rent a pontoon or a paddleboard and explore Wheeler Lake.</h2>
+        <p>
+          Spend the day cruising the lake on a pontoon with the whole crew, or take a kayak, canoe or paddleboard out
+          to the quiet backwaters around the marina. Everything you need is included and we will walk you through it.
+        </p>
         <div class="btn-row">
-          <a class="btn btn--primary" href="/hard-dock/">About the Hard Dock</a>
-          <a class="btn btn--outline" href={`tel:${marina.restaurant.phoneHref}`}>{marina.restaurant.phone}</a>
+          <a class="btn btn--primary" href="/rentals/">Rental details</a>
+          <a class="btn btn--outline" href={marina.phone.mainHref}>{marina.phone.main}</a>
         </div>
       </div>
     </div>

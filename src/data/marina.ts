@@ -9,7 +9,7 @@ export const marina = {
   legalName: 'Riverwalk Marina LLC',
   tagline: 'Your home port on the Tennessee River',
   description:
-    'Full-service marina on Wheeler Lake in Decatur, Alabama. Covered and open wet slips, fuel dock, boat ramp, ship store, repair service, rentals and waterfront dining at the Hard Dock.',
+    'Full-service marina on Wheeler Lake in Decatur, Alabama. Covered and open wet slips, fuel dock, boat ramp, ship store, repair service and rentals minutes from downtown Decatur.',
   established: 1995,
 
   address: {
@@ -136,23 +136,6 @@ export const marina = {
     },
   ],
 
-  restaurant: {
-    name: 'Hard Dock',
-    altName: 'Hard Dock Cafe',
-    phone: '(256) 340-9234',
-    phoneHref: '+12563409234',
-    tagline: 'Waterfront food and drinks at the back of the marina',
-    description:
-      'Casual American fare and seafood with a big deck right on the Tennessee River. Think burgers, sandwiches, wings, fresh catches and cold drinks with a nautical Key West feel inside. Arrive by car or tie up at the dock.',
-    // VERIFY: hours vary by season and have changed in recent years.
-    hours: [
-      { days: 'Tuesday – Thursday', open: '3:00 PM', close: '11:00 PM' },
-      { days: 'Friday – Saturday', open: '3:00 PM', close: '1:30 AM' },
-      { days: 'Sunday – Monday', open: 'Closed', close: '' },
-    ],
-    hoursNote: 'Hours change seasonally. Please call ahead to confirm.',
-  },
-
   driving: [
     { from: 'Downtown Decatur', time: 'Minutes away' },
     { from: 'I-65', time: 'Just minutes' },
@@ -186,7 +169,6 @@ export const nav = [
   { href: '/slips/', label: 'Slips & Storage' },
   { href: '/services/', label: 'Fuel & Services' },
   { href: '/rentals/', label: 'Rentals' },
-  { href: '/hard-dock/', label: 'Hard Dock' },
   { href: '/visit/', label: 'Visit & Contact' },
 ] as const;
 

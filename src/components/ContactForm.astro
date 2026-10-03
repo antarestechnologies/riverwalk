@@ -3,7 +3,7 @@ import { marina } from '../data/marina';
 interface Props { subject?: string; topics?: readonly string[] }
 const {
   subject = 'Website inquiry',
-  topics = ['Slip availability', 'Transient dockage', 'Service & repair', 'Rentals', 'Hard Dock', 'Other'],
+  topics = ['Slip availability', 'Transient dockage', 'Service & repair', 'Rentals', 'Other'],
 } = Astro.props;
 const { endpoint, netlify } = marina.form;
 const action = endpoint || (netlify ? '/' : '#');
